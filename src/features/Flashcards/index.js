@@ -1,20 +1,29 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { FlashCard, FlashCardContent, Wrapper } from "./styled";
+import { FlashCard, Wrapper } from "./styled";
 import { fetchDictionaryApiRequest } from "./flashcardsSlice";
 
 const Flashcards = () => {
+    const [word, setWord] = useState("");
     const dispatch = useDispatch();
 
-    const handleClick = () => {
-        dispatch(fetchDictionaryApiRequest());
+    const onFormSubmit = (event) => {
+        event.preventDefault();
+        dispatch(fetchDictionaryApiRequest(word));
     };
 
     return (
         <Wrapper>
             <FlashCard>
-                <FlashCardContent>test word
-                    <button onClick={handleClick}>Kliknij</button>
-                </FlashCardContent>
+                <form onSubmit={onFormSubmit}>
+                    <input
+                        type="text"
+                        value={word}
+                        onChange={({ target }) => setWord(target.value)}
+                        required
+                    />
+                    <button>Kliknij</button>
+                </form>
             </FlashCard>
         </Wrapper>
     );
