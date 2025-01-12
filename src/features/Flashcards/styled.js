@@ -16,10 +16,3 @@ export const FlashCard = styled.div`
     padding: 20px;
     background: ${({ theme }) => theme.colors.manatee};
 `;
-
-export const FlashCardContent = styled.p`
-    font-size: 32px;
-    font-weight: 600;
-    margin: 0;
-    color: ${({ theme }) => theme.colors.white};
-`;
