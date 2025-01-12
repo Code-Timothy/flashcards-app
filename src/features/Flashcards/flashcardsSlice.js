@@ -7,21 +7,12 @@ const flashcardsSlice = createSlice({
         loading: false,
         error: null,
     },
-    reducers: {
-        fetchDictionaryApiRequest: (state) => {
-            state.loading = true;
-            state.error = null;
-        },
-        fetchDictionaryApiSuccess: (state, action) => {
-            state.loading = false;
-            state.cards = action.payload;
-        },
-        fetchDictionaryApiFailure: (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-        },
-    },
+    reducers: {},
 });
 
-export const { fetchDictionaryApiRequest, fetchDictionaryApiSuccess, fetchDictionaryApiFailure } = flashcardsSlice.actions;
+export const { } = flashcardsSlice.actions;
+
+export const selectCardsState = (state) => state.cards;
+export const selectCards = (state) => selectCardsState(state).cards
+
 export const flashcardsReducer = flashcardsSlice.reducer;

@@ -8,11 +8,19 @@ export const Wrapper = styled.div`
 `;
 
 export const FlashCard = styled.div`
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
+    grid-template-rows: 1fr 1fr;
     min-height: 300px;
     min-width: 500px;
     padding: 20px;
     background: ${({ theme }) => theme.colors.manatee};
+`;
+
+export const FlashCardContent = styled.p`
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600px;
+    color: ${({ theme }) => theme.colors.white};
 `;
