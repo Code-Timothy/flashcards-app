@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/flashcards-app/static/js/main.a1c122b7.js",
+    "static/js/453.17460a94.chunk.js": "/flashcards-app/static/js/453.17460a94.chunk.js",
+    "index.html": "/flashcards-app/index.html",
+    "main.a1c122b7.js.map": "/flashcards-app/static/js/main.a1c122b7.js.map",
+    "453.17460a94.chunk.js.map": "/flashcards-app/static/js/453.17460a94.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a1c122b7.js"
+  ]
+}
