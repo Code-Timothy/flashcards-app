@@ -3,7 +3,7 @@ import { flashcardsReducer } from "../features/Flashcards/flashcardsSlice";
 
 const store = configureStore({
     reducer: {
-        cards: flashcardsReducer,
+        flashcards: flashcardsReducer,
     },
 });
 

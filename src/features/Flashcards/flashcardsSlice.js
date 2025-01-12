@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const flashcardsSlice = createSlice({
     name: "flashcards",
     initialState: {
-        cards: [],
+        flashcards: [],
         loading: false,
         error: null,
     },
@@ -12,7 +12,7 @@ const flashcardsSlice = createSlice({
 
 export const { } = flashcardsSlice.actions;
 
-export const selectCardsState = (state) => state.cards;
-export const selectCards = (state) => selectCardsState(state).cards
+export const selectCardsState = (state) => state.flashcards;
+export const selectCards = (state) => selectCardsState(state).flashcards;
 
 export const flashcardsReducer = flashcardsSlice.reducer;
