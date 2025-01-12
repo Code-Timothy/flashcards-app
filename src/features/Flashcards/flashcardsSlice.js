@@ -7,12 +7,16 @@ const flashcardsSlice = createSlice({
         loading: false,
         error: null,
     },
-    reducers: {},
+    reducers: {
+        addFlashcard: (state, action) => {
+            state.flashcards.push(action.payload);
+        },
+    },
 });
 
-export const { } = flashcardsSlice.actions;
+export const { addFlashcard } = flashcardsSlice.actions;
 
-export const selectCardsState = (state) => state.flashcards;
-export const selectCards = (state) => selectCardsState(state).flashcards;
+export const selectFlashcardsState = (state) => state.flashcards;
+export const selectFlashcards = (state) => selectFlashcardsState(state).flashcards;
 
 export const flashcardsReducer = flashcardsSlice.reducer;
