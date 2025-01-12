@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
     margin-top: 50px;
 `;
 
-export const FlashCard = styled.div`
+export const Flashcard = styled.div`
     display: grid;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@ export const FlashCard = styled.div`
     background: ${({ theme }) => theme.colors.manatee};
 `;
 
-export const FlashCardContent = styled.p`
+export const FlashcardContent = styled.p`
     text-align: center;
     font-size: 30px;
     font-weight: 600px;
