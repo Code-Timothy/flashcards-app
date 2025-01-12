@@ -15,9 +15,11 @@ const Flashcards = () => {
 
         dispatch(addFlashcard({
             id: nanoid(),
-            word,
-            meaning,
+            word: word.trim(),
+            meaning: meaning.trim(),
         }));
+        setWord("");
+        setMeaning("");
     };
 
     return (
