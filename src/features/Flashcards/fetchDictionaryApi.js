@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const fetchDictionaryApi = async () => {
+export const fetchDictionaryApi = async (word) => {
 
-    const apiLink = `https://api.dictionaryapi.dev/api/v2/entries/en/hello`;
+    const apiLink = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
 
     try {
         const response = await axios.get(apiLink);
