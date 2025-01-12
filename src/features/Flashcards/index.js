@@ -1,5 +1,11 @@
+import { FlashCard, FlashCardContent, Wrapper } from "./styled";
+
 const Flashcards = () => (
-    <div>test</div>
+    <Wrapper>
+        <FlashCard>
+            <FlashCardContent>test word</FlashCardContent>
+        </FlashCard>
+    </Wrapper>
 );
 
 export default Flashcards;
