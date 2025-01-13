@@ -18,5 +18,5 @@ export const Button = styled.button`
     &:hover{
         cursor: pointer;
         box-shadow: inset 0 -2px 0 ${({ theme }) => theme.colors.portage};
-    }
+    };
 `;
