@@ -1,18 +1,23 @@
-import { GlobalStyles } from "./core/globalStyles";
 import { ThemeProvider } from "styled-components";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { GlobalStyles } from "./core/globalStyles";
 import { theme } from "./core/theme";
-import { Container } from "./common/Container";
 import Navigation from "./features/Navigation";
-import Flashcards from "./features/Flashcards";
+import CreateFlashcards from "./features/Flashcards/pages/CreateFlashcards";
+import PractiseFlashcards from "./features/Flashcards/pages/PractiseFlashcards";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Navigation />
-      <Container>
-        <Flashcards />
-      </Container>
+      <HashRouter>
+        <Navigation />
+        <Routes>
+          <Route path="/create-flashcards" element={<CreateFlashcards />} />
+          <Route path="/practise" element={<PractiseFlashcards />} />
+          <Route path="/" element={<Navigate to="/create-flashcards" />} />
+        </Routes>
+      </HashRouter>
     </ThemeProvider>
   );
 }
