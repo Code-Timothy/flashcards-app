@@ -2,14 +2,18 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Flashcard, Form, Wrapper, Category } from "../../styled";
 import { Container } from "../../../../common/Container";
-import { addCategory, addFlashcard, selectFlashcards, selectGlobalCategory } from "../../flashcardsSlice";
+import { addCategory, addFlashcard, selectFlashcards, selectGlobalCategories } from "../../flashcardsSlice";
 
 const CreateFlashcards = () => {
     const [word, setWord] = useState("");
     const [meaning, setMeaning] = useState("");
     const [category, setCategory] = useState("");
-    const globalCategory = useSelector(selectGlobalCategory);
+    const [isCategoryAdded, setIsCategoryAdded] = useState(false);
+    const [currentCategory, setCurrentCategory] = useState(null);
+
+    const globalCategories = useSelector(selectGlobalCategories);
     const flashcards = useSelector(selectFlashcards);
+
     const dispatch = useDispatch();
 
     const onFormSubmit = (event) => {
@@ -19,7 +23,7 @@ const CreateFlashcards = () => {
             id: flashcards.length !== 0 ? Math.max(...flashcards.map(flashcard => flashcard.id)) + 1 : 1,
             word: word.trim(),
             meaning: meaning.trim(),
-            globalCategory: globalCategory || category,
+            globalCategories: currentCategory,
         }));
         setWord("");
         setMeaning("");
@@ -29,12 +33,18 @@ const CreateFlashcards = () => {
         event.preventDefault();
 
         dispatch(addCategory(category.trim()));
+        setIsCategoryAdded(true);
+        setCurrentCategory(category.trim());
+    };
+
+    const handleCategoryChange = ({ target }) => {
+        setCurrentCategory(target.value);
     };
 
     return (
         <Container>
             <Wrapper>
-                {!globalCategory && (
+                {!isCategoryAdded && (
                     <Flashcard>
                         <form onSubmit={onCategorySubmit}>
                             <input
@@ -48,9 +58,23 @@ const CreateFlashcards = () => {
                         </form>
                     </Flashcard>
                 )}
-                {globalCategory && (
+
+                {isCategoryAdded && (
+                    <div>
+                        <select
+                            value={currentCategory}
+                            onChange={handleCategoryChange}
+                        >
+                            {globalCategories.map((category, index) => (
+                                <option key={index}>{category}</option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+
+                {isCategoryAdded && (
                     <Flashcard>
-                        <Category>{globalCategory}</Category>
+                        <Category>{currentCategory}</Category>
                         <Form onSubmit={onFormSubmit}>
                             <input
                                 type="text"
@@ -66,7 +90,7 @@ const CreateFlashcards = () => {
                                 onChange={({ target }) => setMeaning(target.value)}
                                 required
                             />
-                            <button>Add</button>
+                            <button>Add Flashcard</button>
                         </Form>
                     </Flashcard>
                 )}

@@ -4,17 +4,24 @@ const flashcardsSlice = createSlice({
     name: "flashcards",
     initialState: {
         flashcards: [],
-        globalCategory: null,
+        globalCategories: [],
         loading: false,
         error: null,
         currentIndex: 0,
     },
     reducers: {
         addFlashcard: (state, action) => {
-            state.flashcards.push(action.payload);
+            const category = action.payload.globalCategories;
+
+            state.flashcards.push({
+                ...action.payload,
+                globalCategories: [category],
+            });
         },
         addCategory: (state, action) => {
-            state.globalCategory = action.payload;
+            if (!state.globalCategories.includes(action.payload)) {
+                state.globalCategories.push(action.payload);
+            }
         },
         nextFlashcard: (state) => {
             const nextIndex = state.currentIndex + 1;
@@ -32,7 +39,7 @@ export const { addFlashcard, addCategory, nextFlashcard } = flashcardsSlice.acti
 
 export const selectFlashcardsState = (state) => state.flashcards;
 export const selectFlashcards = (state) => selectFlashcardsState(state).flashcards;
-export const selectGlobalCategory = (state) => selectFlashcardsState(state).globalCategory;
+export const selectGlobalCategories = (state) => selectFlashcardsState(state).globalCategories;
 export const selectCurrentIndex = (state) => selectFlashcardsState(state).currentIndex;
 
 export const flashcardsReducer = flashcardsSlice.reducer;
