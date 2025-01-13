@@ -1,9 +1,10 @@
+import { NavLink } from "react-router-dom";
 import { StyledNavigation, Button } from "./styled";
 
 const Navigation = () => (
     <StyledNavigation>
-        <Button>Create Flashcards</Button>
-        <Button>Practice</Button>
+        <NavLink to="/create-flashcards"><Button>Create Flashcards</Button></NavLink>
+        <NavLink to="/practise"><Button>Practice</Button></NavLink>
     </StyledNavigation >
 );
 
