@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nanoid } from "@reduxjs/toolkit";
 import { Flashcard, Form, Wrapper, Category } from "../../styled";
 import { Container } from "../../../../common/Container";
-import { addCategory, addFlashcard, selectGlobalCategory } from "../../flashcardsSlice";
+import { addCategory, addFlashcard, selectFlashcards, selectGlobalCategory } from "../../flashcardsSlice";
 
 const CreateFlashcards = () => {
     const [word, setWord] = useState("");
     const [meaning, setMeaning] = useState("");
     const [category, setCategory] = useState("");
     const globalCategory = useSelector(selectGlobalCategory);
+    const flashcards = useSelector(selectFlashcards);
     const dispatch = useDispatch();
 
     const onFormSubmit = (event) => {
         event.preventDefault();
 
         dispatch(addFlashcard({
-            id: nanoid(),
+            id: flashcards.length !== 0 ? Math.max(...flashcards.map(flashcard => flashcard.id)) + 1 : 1,
             word: word.trim(),
             meaning: meaning.trim(),
             globalCategory: globalCategory || category,
