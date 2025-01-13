@@ -15,7 +15,7 @@ const PractiseFlashcards = () => {
         setIsFlipped(flip => !flip);
     };
 
-    const currentFlashcard = flashcards[currentIndex] || {};
+    const currentFlashcard = flashcards[currentIndex];
 
     return (
         <Container>
