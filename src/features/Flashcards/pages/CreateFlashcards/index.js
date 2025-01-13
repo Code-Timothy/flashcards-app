@@ -42,6 +42,7 @@ const CreateFlashcards = () => {
                                 placeholder="Enter category"
                                 value={category}
                                 onChange={({ target }) => setCategory(target.value)}
+                                required
                             />
                             <button>Add category</button>
                         </form>
