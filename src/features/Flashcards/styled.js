@@ -20,14 +20,10 @@ export const Flashcard = styled.div`
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr;
     min-height: 300px;
     min-width: 400px;
     background: ${({ theme }) => theme.colors.manatee};
-
-    ${({ $category }) => $category && css`
-        grid-template-rows: 1fr;
-    `};
 `;
 
 export const Category = styled.h2`

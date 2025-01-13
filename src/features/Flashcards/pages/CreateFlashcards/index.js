@@ -35,7 +35,7 @@ const CreateFlashcards = () => {
         <Container>
             <Wrapper>
                 {!globalCategory && (
-                    <Flashcard $category>
+                    <Flashcard>
                         <form onSubmit={onCategorySubmit}>
                             <input
                                 type="text"
