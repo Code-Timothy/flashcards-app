@@ -23,6 +23,7 @@ const PractiseFlashcards = () => {
                 <p>You don't have flashcards yet</p>
             ) : (
                 <>
+                    <p>{currentIndex + 1} / {flashcards.length}</p>
                     <Wrapper $isFlipped={isFlipped} onClick={handleFlip}>
                         {!isFlipped && (
                             <Flashcard $isFlipped={isFlipped}>
