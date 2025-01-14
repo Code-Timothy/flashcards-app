@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Flashcard, Form, Wrapper, Category } from "../../styled";
 import { Container } from "../../../../common/Container";
 import { addCategory, addFlashcard, selectFlashcardsByCategory, selectGlobalCategories } from "../../flashcardsSlice";
+import {
+    StyledSection,
+    Wrapper,
+    Title,
+    SectionInput,
+    SectionButton,
+    SectionForm
+} from "../../styled";
 
 const CreateFlashcards = () => {
     const [word, setWord] = useState("");
@@ -46,7 +53,21 @@ const CreateFlashcards = () => {
 
     return (
         <Container>
-            <div>
+            <StyledSection>
+                <Title>Add new category</Title>
+                <SectionForm onSubmit={onCategorySubmit}>
+                    <SectionInput
+                        type="text"
+                        placeholder="Enter category"
+                        value={category}
+                        onChange={({ target }) => setCategory(target.value)}
+                        required
+                    />
+                    <SectionButton>Add category</SectionButton>
+                </SectionForm>
+            </StyledSection>
+            <StyledSection>
+                <Title>Select a category</Title>
                 <select
                     value={currentCategory}
                     onChange={({ target }) => setCurrentCategory(target.value)}
@@ -55,46 +76,36 @@ const CreateFlashcards = () => {
                         <option key={index}>{category}</option>
                     ))}
                 </select>
-            </div>
-            <Wrapper>
-                {!isCategoryAdded && (
-                    <Flashcard>
-                        <form onSubmit={onCategorySubmit}>
-                            <input
-                                type="text"
-                                placeholder="Enter category"
-                                value={category}
-                                onChange={({ target }) => setCategory(target.value)}
-                                required
-                            />
-                            <button>Add category</button>
-                        </form>
-                    </Flashcard>
-                )}
-
-                {isCategoryAdded && (
-                    <Flashcard>
-                        <Category>{currentCategory}</Category>
-                        <Form onSubmit={onFormSubmit}>
-                            <input
-                                type="text"
-                                placeholder="Enter a word"
-                                value={word}
-                                onChange={({ target }) => setWord(target.value)}
-                                required
-                            />
-                            <input
-                                type="text"
-                                placeholder="Enter a meaning"
-                                value={meaning}
-                                onChange={({ target }) => setMeaning(target.value)}
-                                required
-                            />
-                            <button>Add Flashcard</button>
-                        </Form>
-                    </Flashcard>
-                )}
-            </Wrapper >
+            </StyledSection>
+            {isCategoryAdded && (
+                <Wrapper>
+                    <StyledSection $flashcard>
+                        <Title>Category: {currentCategory}</Title>
+                        <div>
+                            <SectionForm
+                                $flashcard
+                                onSubmit={onFormSubmit}
+                            >
+                                <SectionInput
+                                    type="text"
+                                    placeholder="Enter a word"
+                                    value={word}
+                                    onChange={({ target }) => setWord(target.value)}
+                                    required
+                                />
+                                <SectionInput
+                                    type="text"
+                                    placeholder="Enter a meaning"
+                                    value={meaning}
+                                    onChange={({ target }) => setMeaning(target.value)}
+                                    required
+                                />
+                                <SectionButton>Add Flashcard</SectionButton>
+                            </SectionForm>
+                        </div>
+                    </StyledSection>
+                </Wrapper>
+            )}
         </Container>
     );
 };
