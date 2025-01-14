@@ -9,7 +9,7 @@ import {
     SectionInput,
     SectionButton,
     SectionForm
-} from "../../styled";
+} from "./styled";
 
 const CreateFlashcards = () => {
     const [word, setWord] = useState("");
