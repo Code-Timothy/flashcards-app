@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const flashcardsSlice = createSlice({
     name: "flashcards",
     initialState: {
-        flashcards: [],
+        flashcardsByCategory: {},
         globalCategories: [],
         loading: false,
         error: null,
@@ -11,22 +11,39 @@ const flashcardsSlice = createSlice({
     },
     reducers: {
         addFlashcard: (state, action) => {
-            const category = action.payload.globalCategories;
+            const { category, word, meaning, id } = action.payload;
 
-            state.flashcards.push({
-                ...action.payload,
-                globalCategories: [category],
+            if (!state.flashcardsByCategory[category]) {
+                state.flashcardsByCategory[category] = [];
+            };
+
+            state.flashcardsByCategory[category].push({
+                id,
+                word,
+                meaning,
             });
         },
         addCategory: (state, action) => {
-            if (!state.globalCategories.includes(action.payload)) {
-                state.globalCategories.push(action.payload);
-            }
+            const category = action.payload;
+
+            if (!state.globalCategories.includes(category)) {
+                state.globalCategories.push(category);
+            };
+
+            if (!state.flashcardsByCategory[category]) {
+                state.flashcardsByCategory[category] = [];
+            };
         },
-        nextFlashcard: (state) => {
+        nextFlashcard: (state, action) => {
+            const category = action.payload;
+
+            if (!state.flashcardsByCategory[category] || state.flashcardsByCategory[category].length === 0) {
+                state.currentIndex = 0;
+            };
+
             const nextIndex = state.currentIndex + 1;
 
-            if (nextIndex < state.flashcards.length) {
+            if (nextIndex < state.flashcardsByCategory[category].length) {
                 state.currentIndex = nextIndex;
             } else {
                 state.currentIndex = 0;
@@ -38,7 +55,8 @@ const flashcardsSlice = createSlice({
 export const { addFlashcard, addCategory, nextFlashcard } = flashcardsSlice.actions;
 
 export const selectFlashcardsState = (state) => state.flashcards;
-export const selectFlashcards = (state) => selectFlashcardsState(state).flashcards;
+export const selectFlashcardsByCategory = (state, category) =>
+    selectFlashcardsState(state).flashcardsByCategory[category] || [];
 export const selectGlobalCategories = (state) => selectFlashcardsState(state).globalCategories;
 export const selectCurrentIndex = (state) => selectFlashcardsState(state).currentIndex;
 
