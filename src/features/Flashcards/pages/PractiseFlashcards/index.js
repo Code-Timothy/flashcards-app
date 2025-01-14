@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Container } from "../../../../common/Container";
 import { Wrapper, Flashcard, FlashcardContent } from "../../styled";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFlashcards, nextFlashcard, selectCurrentIndex } from "../../flashcardsSlice";
+import { nextFlashcard, selectCurrentIndex, selectFlashcardsByCategory, selectGlobalCategories } from "../../flashcardsSlice";
 
 const PractiseFlashcards = () => {
     const [isFlipped, setIsFlipped] = useState(false);
-    const flashcards = useSelector(selectFlashcards);
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    const flashcardsByCategory = useSelector((state) => selectFlashcardsByCategory(state, selectedCategory));
     const currentIndex = useSelector(selectCurrentIndex);
+    const globalCategories = useSelector(selectGlobalCategories);
 
     const dispatch = useDispatch();
 
@@ -15,15 +18,25 @@ const PractiseFlashcards = () => {
         setIsFlipped(flip => !flip);
     };
 
-    const currentFlashcard = flashcards[currentIndex];
+    const currentFlashcard = flashcardsByCategory[currentIndex];
 
     return (
         <Container>
-            {flashcards.length === 0 ? (
-                <p>You don't have flashcards yet</p>
+            <select
+                value={selectedCategory}
+                onChange={({ target }) => setSelectedCategory(target.value)}
+            >
+                {globalCategories.map((category, index) => (
+                    <option key={index} value={category}>{category}</option>
+                ))}
+            </select>
+            {selectedCategory === "" ? (
+                <p>Please select category to practise.</p>
+            ) : flashcardsByCategory.length === 0 ? (
+                <p>No flashcards found for the selected category.</p>
             ) : (
                 <>
-                    <p>{currentIndex + 1} / {flashcards.length}</p>
+                    <p>{currentIndex + 1} / {flashcardsByCategory.length}</p>
                     <Wrapper $isFlipped={isFlipped} onClick={handleFlip}>
                         {!isFlipped && (
                             <Flashcard $isFlipped={isFlipped}>
@@ -36,7 +49,7 @@ const PractiseFlashcards = () => {
                             </Flashcard>
                         )}
                     </Wrapper>
-                    <button onClick={() => dispatch(nextFlashcard())}>Next</button>
+                    <button onClick={() => dispatch(nextFlashcard(selectedCategory))}>Next</button>
                     <button onClick={handleFlip}>Flip the flishcard</button>
                 </>
             )}
