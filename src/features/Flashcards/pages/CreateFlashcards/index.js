@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Flashcard, Form, Wrapper, Category } from "../../styled";
 import { Container } from "../../../../common/Container";
-import { addCategory, addFlashcard, selectFlashcards, selectGlobalCategories } from "../../flashcardsSlice";
+import { addCategory, addFlashcard, selectFlashcardsByCategory, selectGlobalCategories } from "../../flashcardsSlice";
 
 const CreateFlashcards = () => {
     const [word, setWord] = useState("");
@@ -12,18 +12,25 @@ const CreateFlashcards = () => {
     const [currentCategory, setCurrentCategory] = useState(null);
 
     const globalCategories = useSelector(selectGlobalCategories);
-    const flashcards = useSelector(selectFlashcards);
+    const flashcardsByCategory = useSelector(selectFlashcardsByCategory);
 
     const dispatch = useDispatch();
 
     const onFormSubmit = (event) => {
         event.preventDefault();
 
+        if (!currentCategory) {
+            alert("Please select category.");
+            return;
+        }
+
+        const flashcardsInCategory = flashcardsByCategory[currentCategory] || [];
+
         dispatch(addFlashcard({
-            id: flashcards.length !== 0 ? Math.max(...flashcards.map(flashcard => flashcard.id)) + 1 : 1,
+            id: flashcardsInCategory.length + 1,
             word: word.trim(),
             meaning: meaning.trim(),
-            globalCategories: currentCategory,
+            category: currentCategory,
         }));
         setWord("");
         setMeaning("");
@@ -37,12 +44,18 @@ const CreateFlashcards = () => {
         setCurrentCategory(category.trim());
     };
 
-    const handleCategoryChange = ({ target }) => {
-        setCurrentCategory(target.value);
-    };
-
     return (
         <Container>
+            <div>
+                <select
+                    value={currentCategory}
+                    onChange={({ target }) => setCurrentCategory(target.value)}
+                >
+                    {globalCategories.map((category, index) => (
+                        <option key={index}>{category}</option>
+                    ))}
+                </select>
+            </div>
             <Wrapper>
                 {!isCategoryAdded && (
                     <Flashcard>
@@ -57,19 +70,6 @@ const CreateFlashcards = () => {
                             <button>Add category</button>
                         </form>
                     </Flashcard>
-                )}
-
-                {isCategoryAdded && (
-                    <div>
-                        <select
-                            value={currentCategory}
-                            onChange={handleCategoryChange}
-                        >
-                            {globalCategories.map((category, index) => (
-                                <option key={index}>{category}</option>
-                            ))}
-                        </select>
-                    </div>
                 )}
 
                 {isCategoryAdded && (
