@@ -7,6 +7,7 @@ export const StyledNavigation = styled.nav`
     gap: 30px;
     background: ${({ theme }) => theme.colors.steelGray};
     padding: 20px;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.portage};
 `;
 
 export const Button = styled.button`
