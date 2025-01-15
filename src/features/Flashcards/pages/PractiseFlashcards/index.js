@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Container } from "../../../../common/Container";
 import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
-import { nextFlashcard, selectCurrentIndex, selectFlashcardsByCategory, selectGlobalCategories } from "../../flashcardsSlice";
+import { nextFlashcard, selectCurrentIndex, selectFlashcardsBySpecificCategory, selectGlobalCategories } from "../../flashcardsSlice";
 
 const PractiseFlashcards = () => {
     const [isFlipped, setIsFlipped] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("");
 
-    const flashcardsByCategory = useSelector((state) => selectFlashcardsByCategory(state, selectedCategory));
+    const flashcardsBySpecificCategory = useSelector((state) => selectFlashcardsBySpecificCategory(state, selectedCategory));
     const currentIndex = useSelector(selectCurrentIndex);
     const globalCategories = useSelector(selectGlobalCategories);
 
@@ -18,7 +18,7 @@ const PractiseFlashcards = () => {
         setIsFlipped(flip => !flip);
     };
 
-    const currentFlashcard = flashcardsByCategory[currentIndex];
+    const currentFlashcard = flashcardsBySpecificCategory[currentIndex];
 
     return (
         <Container>
@@ -33,11 +33,11 @@ const PractiseFlashcards = () => {
             </select>
             {selectedCategory === "" ? (
                 <p>Please select category to practise.</p>
-            ) : flashcardsByCategory.length === 0 ? (
+            ) : flashcardsBySpecificCategory.length === 0 ? (
                 <p>No flashcards found for the selected category.</p>
             ) : (
                 <Wrapper>
-                    <Counter>{currentIndex + 1} / {flashcardsByCategory.length}</Counter>
+                    <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
                     <Flashcard $isFlipped={isFlipped} onClick={handleFlip}>
                         {!isFlipped && (
                             <div $isFlipped={isFlipped}>
