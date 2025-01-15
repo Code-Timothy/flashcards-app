@@ -72,9 +72,13 @@ const flashcardsSlice = createSlice({
 export const { addFlashcard, addCategory, nextFlashcard } = flashcardsSlice.actions;
 
 export const selectFlashcardsState = (state) => state.flashcards;
-export const selectFlashcardsByCategory = (state, category) =>
-    selectFlashcardsState(state).flashcardsByCategory[category] || [];
 export const selectGlobalCategories = (state) => selectFlashcardsState(state).globalCategories;
 export const selectCurrentIndex = (state) => selectFlashcardsState(state).currentIndex;
+
+export const selectFlashcardsByCategory = (state) =>
+    selectFlashcardsState(state).flashcardsByCategory;
+
+export const selectFlashcardsBySpecificCategory = (state, category) =>
+    selectFlashcardsState(state).flashcardsByCategory[category] || {};
 
 export const flashcardsReducer = flashcardsSlice.reducer;
