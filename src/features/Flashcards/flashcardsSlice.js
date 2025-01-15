@@ -1,14 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getFlashcardsFromLocalStorage } from "./flashcardsLocalStorage";
+
+const initializeState = () => {
+    try {
+        const savedData = getFlashcardsFromLocalStorage("flashcards");
+        return {
+            flashcardsByCategory: savedData.flashcardsByCategory || {},
+            globalCategories: savedData.globalCategories || [],
+            loading: false,
+            error: null,
+            currentIndex: 0,
+        };
+    } catch (error) {
+        console.error("Error loading flashcards from localStorage:", error);
+        return {
+            flashcardsByCategory: {},
+            globalCategories: [],
+            loading: false,
+            error: null,
+            currentIndex: 0,
+        };
+    };
+};
 
 const flashcardsSlice = createSlice({
     name: "flashcards",
-    initialState: {
-        flashcardsByCategory: {},
-        globalCategories: [],
-        loading: false,
-        error: null,
-        currentIndex: 0,
-    },
+    initialState: initializeState(),
     reducers: {
         addFlashcard: (state, action) => {
             const { category, word, meaning, id } = action.payload;
