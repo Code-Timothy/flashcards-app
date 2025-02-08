@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "../../../../common/Container";
 import CategoryTiles from "./CategoryTiles";
-import { addCategory, addFlashcard, selectFlashcardsByCategory, selectGlobalCategories } from "../../flashcardsSlice";
+import { addCategory, addFlashcard, selectCurrentCategory, selectFlashcardsByCategory, setCurrentCategory } from "../../flashcardsSlice";
 import {
     StyledSection,
     Wrapper,
@@ -17,9 +17,9 @@ const CreateFlashcards = () => {
     const [meaning, setMeaning] = useState("");
     const [category, setCategory] = useState("");
     const [isCategoryAdded, setIsCategoryAdded] = useState(false);
-    const [currentCategory, setCurrentCategory] = useState(null);
 
-    const globalCategories = useSelector(selectGlobalCategories);
+    const currentCategory = useSelector(selectCurrentCategory);
+
     const flashcardsByCategory = useSelector(selectFlashcardsByCategory);
 
     const dispatch = useDispatch();
@@ -49,6 +49,7 @@ const CreateFlashcards = () => {
         event.preventDefault();
 
         dispatch(addCategory(category.trim()));
+        dispatch(setCurrentCategory(category.trim()))
         setIsCategoryAdded(true);
         setCurrentCategory(category.trim());
     };
@@ -74,19 +75,7 @@ const CreateFlashcards = () => {
                 <CategoryTiles />
             </StyledSection>
 
-            <StyledSection>
-                <Title>Select a category</Title>
-                <select
-                    value={currentCategory}
-                    onChange={({ target }) => setCurrentCategory(target.value)}
-                >
-                    {globalCategories.map((category, index) => (
-                        <option key={index}>{category}</option>
-                    ))}
-                </select>
-            </StyledSection>
-            
-            {isCategoryAdded && (
+            {currentCategory && (
                 <Wrapper>
                     <StyledSection $flashcard>
                         <Title>Category: {currentCategory}</Title>
