@@ -8,12 +8,19 @@ export const Wrapper = styled.div`
     padding: 20px;
 `;
 
-export const Tile = styled.div`
+export const Tile = styled.button`
+    border: none;
     border-radius: 10px;
     background: ${({ theme }) => theme.colors.gunPowder};
+    transition: transform 0.5s;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.05);
+    }
 `;
 
-export const CategoryName = styled.h2`
+export const CategoryName = styled.span`
     text-align: center;
     padding: 20px;
     margin: 0;
