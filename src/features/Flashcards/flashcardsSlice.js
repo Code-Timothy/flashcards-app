@@ -7,6 +7,7 @@ const initializeState = () => {
         return {
             flashcardsByCategory: savedData.flashcardsByCategory || {},
             globalCategories: savedData.globalCategories || [],
+            currentCategory: null,
             loading: false,
             error: null,
             currentIndex: 0,
@@ -16,6 +17,7 @@ const initializeState = () => {
         return {
             flashcardsByCategory: {},
             globalCategories: [],
+            currentCategory: null,
             loading: false,
             error: null,
             currentIndex: 0,
@@ -66,14 +68,18 @@ const flashcardsSlice = createSlice({
                 state.currentIndex = 0;
             }
         },
+        setCurrentCategory: (state, { payload }) => {
+            state.currentCategory = payload;
+        },
     },
 });
 
-export const { addFlashcard, addCategory, nextFlashcard } = flashcardsSlice.actions;
+export const { addFlashcard, addCategory, nextFlashcard, setCurrentCategory } = flashcardsSlice.actions;
 
 export const selectFlashcardsState = (state) => state.flashcards;
 export const selectGlobalCategories = (state) => selectFlashcardsState(state).globalCategories;
 export const selectCurrentIndex = (state) => selectFlashcardsState(state).currentIndex;
+export const selectCurrentCategory = (state) => selectFlashcardsState(state).currentCategory;
 
 export const selectFlashcardsByCategory = (state) =>
     selectFlashcardsState(state).flashcardsByCategory;
