@@ -18,7 +18,6 @@ const CreateFlashcards = () => {
     const [category, setCategory] = useState("");
 
     const currentCategory = useSelector(selectCurrentCategory);
-
     const flashcardsByCategory = useSelector(selectFlashcardsByCategory);
 
     const dispatch = useDispatch();
@@ -48,6 +47,7 @@ const CreateFlashcards = () => {
         event.preventDefault();
 
         dispatch(addCategory(category.trim()));
+        setCategory("");
         dispatch(setCurrentCategory(category.trim()))
         setCurrentCategory(category.trim());
     };
@@ -69,7 +69,7 @@ const CreateFlashcards = () => {
             </StyledSection>
 
             <StyledSection>
-                <Title>Your categories</Title>
+                <Title>Choose a category to add flashcards</Title>
                 <CategoryTiles />
             </StyledSection>
 
