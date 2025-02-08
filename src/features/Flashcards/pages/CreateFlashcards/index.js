@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "../../../../common/Container";
+import CategoryTiles from "./CategoryTiles";
 import { addCategory, addFlashcard, selectFlashcardsByCategory, selectGlobalCategories } from "../../flashcardsSlice";
 import {
     StyledSection,
@@ -39,6 +40,7 @@ const CreateFlashcards = () => {
             meaning: meaning.trim(),
             category: currentCategory,
         }));
+
         setWord("");
         setMeaning("");
     };
@@ -66,6 +68,12 @@ const CreateFlashcards = () => {
                     <SectionButton>Add category</SectionButton>
                 </SectionForm>
             </StyledSection>
+
+            <StyledSection>
+                <Title>Your categories</Title>
+                <CategoryTiles />
+            </StyledSection>
+
             <StyledSection>
                 <Title>Select a category</Title>
                 <select
@@ -77,6 +85,7 @@ const CreateFlashcards = () => {
                     ))}
                 </select>
             </StyledSection>
+            
             {isCategoryAdded && (
                 <Wrapper>
                     <StyledSection $flashcard>
