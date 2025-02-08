@@ -16,7 +16,6 @@ const CreateFlashcards = () => {
     const [word, setWord] = useState("");
     const [meaning, setMeaning] = useState("");
     const [category, setCategory] = useState("");
-    const [isCategoryAdded, setIsCategoryAdded] = useState(false);
 
     const currentCategory = useSelector(selectCurrentCategory);
 
@@ -50,7 +49,6 @@ const CreateFlashcards = () => {
 
         dispatch(addCategory(category.trim()));
         dispatch(setCurrentCategory(category.trim()))
-        setIsCategoryAdded(true);
         setCurrentCategory(category.trim());
     };
 
