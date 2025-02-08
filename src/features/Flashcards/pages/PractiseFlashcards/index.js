@@ -38,16 +38,16 @@ const PractiseFlashcards = () => {
             ) : (
                 <Wrapper>
                     <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
-                    <Flashcard $isFlipped={isFlipped} onClick={handleFlip}>
+                    <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
                         {!isFlipped && (
-                            <div $isFlipped={isFlipped}>
-                                <FlashcardContent>{currentFlashcard.word}</FlashcardContent>
-                            </div>
+                            <FlashcardContent isFlipped={isFlipped}>
+                                {currentFlashcard.word}
+                            </FlashcardContent>
                         )}
                         {isFlipped && (
-                            <div>
-                                <FlashcardContent $isFlipped={isFlipped}>{currentFlashcard.meaning}</FlashcardContent>
-                            </div>
+                            <FlashcardContent isFlipped={isFlipped}>
+                                {currentFlashcard.meaning}
+                            </FlashcardContent>
                         )}
                     </Flashcard>
                     <ButtonWrapper>

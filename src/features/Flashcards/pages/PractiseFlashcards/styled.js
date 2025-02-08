@@ -12,7 +12,9 @@ export const Counter = styled.p`
     color: ${({ theme }) => theme.colors.white};
 `;
 
-export const Flashcard = styled.div`
+export const Flashcard = styled.div.withConfig({
+    shouldForwardProp: (prop) => prop !== "isFlipped",
+  })`
     width: 400px;
     height: 300px;
     display: flex;
@@ -23,11 +25,13 @@ export const Flashcard = styled.div`
     background: ${({ theme }) => theme.colors.gunPowder};
     transform-style: preserve-3d;
     transition: transform 0.3s;
-    transform: ${({ $isFlipped }) => ($isFlipped ? "rotateY(180deg)" : "rotateY(0deg)")};
+    transform: ${({ isFlipped }) => (isFlipped ? "rotateY(180deg)" : "rotateY(0deg)")};
 `;
 
-export const FlashcardContent = styled.p`
-    animation: ${({ $isFlipped }) => $isFlipped ? css`${spin} 0.1s forwards` : css`${spin} 0.1s backwards`};
+export const FlashcardContent = styled.p.withConfig({
+    shouldForwardProp: (prop) => prop !== "isFlipped",
+  })`
+    animation: ${({ isFlipped }) => isFlipped ? css`${spin} 0.1s forwards` : css`${spin} 0.1s backwards`};
     text-align: center;
     font-size: 30px;
     font-weight: 600px;
