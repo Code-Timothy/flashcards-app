@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { flashcardsReducer } from "../features/Flashcards/flashcardsSlice";
-import { watchFlashcardsLocalStorage } from "../features/Flashcards/flashcardsSaga";
 import createSagaMiddleware from "redux-saga";
+import rootSaga from "./rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,6 +13,6 @@ const store = configureStore({
         getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(watchFlashcardsLocalStorage);
+sagaMiddleware.run(rootSaga);
 
 export default store;
