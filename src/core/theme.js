@@ -7,5 +7,6 @@ export const theme = {
         gunPowder: "#4A465B",
         steelGray: "#1F1D28",
         tuna: "#343141",
+        crimson: "#DC143C",
     },
 };
