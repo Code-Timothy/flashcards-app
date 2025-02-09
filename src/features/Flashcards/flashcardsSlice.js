@@ -79,10 +79,30 @@ const flashcardsSlice = createSlice({
                 flashcardsByCategory[category].splice(flashcardIndex, 1);
             }
         },
+        editWord: ({ flashcardsByCategory }, { payload: { flashcardId, category, newWord } }) => {
+            const flashcard = flashcardsByCategory[category]?.find(flashcard => flashcard.id === flashcardId);
+            if (flashcard) {
+                flashcard.word = newWord;
+            }
+        },
+        editMeaning: ({ flashcardsByCategory }, { payload: { flashcardId, category, newMeaning } }) => {
+            const flashcard = flashcardsByCategory[category]?.find(flashcard => flashcard.id === flashcardId);
+            if (flashcard) {
+                flashcard.meaning = newMeaning;
+            }
+        },
     },
 });
 
-export const { addFlashcard, addCategory, nextFlashcard, setCurrentCategory, removeFlashcard } = flashcardsSlice.actions;
+export const {
+    addFlashcard,
+    addCategory,
+    nextFlashcard,
+    setCurrentCategory,
+    removeFlashcard,
+    editWord,
+    editMeaning,
+} = flashcardsSlice.actions;
 
 export const selectFlashcardsState = (state) => state.flashcards;
 export const selectGlobalCategories = (state) => selectFlashcardsState(state).globalCategories;
