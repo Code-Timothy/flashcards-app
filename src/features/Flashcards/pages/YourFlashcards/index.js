@@ -1,7 +1,24 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CategoryWrapper, Category, Flashcards, Flashcard, Word, Wrapper, RemoveButton, EditSetButton } from "./styled";
-import { editMeaning, editWord, removeFlashcard, selectCurrentCategory, selectFlashcardsByCategory, setCurrentCategory } from "../../flashcardsSlice";
+import {
+    CategoryWrapper,
+    Category,
+    Flashcards,
+    Flashcard,
+    Word,
+    Wrapper,
+    Button,
+    EditSetButton,
+    Input,
+} from "./styled";
+import {
+    editMeaning,
+    editWord,
+    removeFlashcard,
+    selectCurrentCategory,
+    selectFlashcardsByCategory,
+    setCurrentCategory,
+} from "../../flashcardsSlice";
 
 const YourFlashcards = () => {
     const dispatch = useDispatch();
@@ -65,19 +82,22 @@ const YourFlashcards = () => {
                             <Flashcard key={flashcard.id}>
                                 {isEditSet && currentCategory === category && (
                                     <>
-                                        <RemoveButton
+                                        <Button
                                             onClick={() => handleRemoveFlashcard(flashcard.id, category)}
                                         >
                                             ✖
-                                        </RemoveButton>
-                                        <button onClick={() => handleEditFlashcard(flashcard.id)}>
-                                            edytuj
-                                        </button>
+                                        </Button>
+                                        <Button
+                                            $edit
+                                            onClick={() => handleEditFlashcard(flashcard.id)}
+                                        >
+                                            🖊
+                                        </Button>
                                     </>
                                 )}
                                 <Word>
                                     {isEditing[flashcard.id] ? (
-                                        <input
+                                        <Input
                                             value={editedWords[flashcard.id] || flashcard.word}
                                             onChange={(event) => handleWordChange(flashcard.id, event)}
                                         />
@@ -87,7 +107,7 @@ const YourFlashcards = () => {
                                 </Word>
                                 <Word $second>
                                     {isEditing[flashcard.id] ? (
-                                        <input
+                                        <Input
                                             value={editedMeanings[flashcard.id] || flashcard.meaning}
                                             onChange={(event) => handleMeaningChange(flashcard.id, event)}
                                         />
@@ -96,9 +116,12 @@ const YourFlashcards = () => {
                                     )}
                                 </Word>
                                 {isEditing[flashcard.id] && (
-                                    <button onClick={() => handleSaveWord(flashcard.id, category)}>
-                                        Save
-                                    </button>
+                                    <Button
+                                        $edit
+                                        onClick={() => handleSaveWord(flashcard.id, category)}
+                                    >
+                                        ✔
+                                    </Button>
                                 )}
                             </Flashcard>
                         ))}

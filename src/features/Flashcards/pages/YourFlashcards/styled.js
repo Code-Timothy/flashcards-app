@@ -41,7 +41,7 @@ export const Flashcards = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
     padding: 20px;
     text-align: center;
 `;
@@ -54,7 +54,7 @@ export const Flashcard = styled.div`
     border-radius: 5px;
 `;
 
-export const RemoveButton = styled.button`
+export const Button = styled.button`
     position: absolute;
     top: -10px;
     right: -10px;
@@ -71,6 +71,11 @@ export const RemoveButton = styled.button`
         transform: scale(1.05);
         opacity: 90%;
     };
+
+    ${({ $edit }) => $edit && css`
+        left: -10px;
+        background: ${({ theme }) => theme.colors.buttercup};
+    `};
 `;
 
 export const Word = styled.p`
@@ -81,4 +86,12 @@ export const Word = styled.p`
     ${({ $second }) => $second && css`
         border-bottom: none;
     `};
+`;
+
+export const Input = styled.input`
+    background-color: ${({ theme }) => theme.colors.chatelle};
+    text-align: center;
+    border-radius: 5px;
+    border: 3px solid ${({ theme }) => theme.colors.portage};
+    width: 130px;
 `;
