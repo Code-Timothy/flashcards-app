@@ -5,6 +5,7 @@ import { theme } from "./core/theme";
 import Navigation from "./features/Navigation";
 import CreateFlashcards from "./features/Flashcards/pages/CreateFlashcards";
 import PractiseFlashcards from "./features/Flashcards/pages/PractiseFlashcards";
+import YourFlashcards from "./features/Flashcards/pages/YourFlashcards";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/create-flashcards" element={<CreateFlashcards />} />
+          <Route path="/your-flashcards" element={<YourFlashcards />} />
           <Route path="/practise" element={<PractiseFlashcards />} />
           <Route path="/" element={<Navigate to="/create-flashcards" />} />
         </Routes>
