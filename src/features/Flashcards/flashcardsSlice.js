@@ -71,10 +71,18 @@ const flashcardsSlice = createSlice({
         setCurrentCategory: (state, { payload }) => {
             state.currentCategory = payload;
         },
+        removeFlashcard: ({ flashcardsByCategory }, { payload: { flashcardId, category } }) => {
+            if (category && flashcardsByCategory[category]) {
+                const flashcardIndex = (
+                    flashcardsByCategory[category].findIndex(flashcard => flashcard.id === flashcardId)
+                );
+                flashcardsByCategory[category].splice(flashcardIndex, 1);
+            }
+        },
     },
 });
 
-export const { addFlashcard, addCategory, nextFlashcard, setCurrentCategory } = flashcardsSlice.actions;
+export const { addFlashcard, addCategory, nextFlashcard, setCurrentCategory, removeFlashcard } = flashcardsSlice.actions;
 
 export const selectFlashcardsState = (state) => state.flashcards;
 export const selectGlobalCategories = (state) => selectFlashcardsState(state).globalCategories;
