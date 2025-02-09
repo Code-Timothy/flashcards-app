@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { CategoryWrapper, Category, Flashcards, Flashcard, Word, Wrapper } from "./styled";
+import { CategoryWrapper, Category, Flashcards, Flashcard, Word, Wrapper, RemoveButton } from "./styled";
 import { removeFlashcard, selectFlashcardsByCategory, setCurrentCategory } from "../../flashcardsSlice";
 
 const YourFlashcards = () => {
@@ -19,7 +19,11 @@ const YourFlashcards = () => {
                     <Flashcards>
                         {flashcards[category].map((flashcard => (
                             <Flashcard>
-                                <button onClick={() => handleRemoveFlashcard(flashcard.id, category)}>usuń</button>
+                                <RemoveButton
+                                    onClick={() => handleRemoveFlashcard(flashcard.id, category)}
+                                >
+                                    ✖
+                                </RemoveButton>
                                 <Word>
                                     {flashcard.word}
                                 </Word>

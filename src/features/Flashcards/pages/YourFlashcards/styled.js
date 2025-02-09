@@ -23,19 +23,35 @@ export const Flashcards = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
+    gap: 20px;
+    padding: 20px;
     text-align: center;
 `;
 
 export const Flashcard = styled.div`
+    position: relative;
     min-width: 150px;
     background: ${({ theme }) => theme.colors.chatelle};
     padding: 10px;
-    transition: transform 0.5s;
+    border-radius: 5px;
+`;
+
+export const RemoveButton = styled.button`
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border-radius: 50%;
+    border: none;
+    width: 30px;
+    height: 30px;
+    background: ${({ theme }) => theme.colors.crimson};
+    color: ${({ theme }) => theme.colors.white};
+    transition: transfrom 0.5s;
 
     &:hover{
+        cursor: pointer;
         transform: scale(1.05);
+        opacity: 90%;
     };
 `;
 
