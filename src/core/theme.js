@@ -8,5 +8,6 @@ export const theme = {
         steelGray: "#1F1D28",
         tuna: "#343141",
         crimson: "#DC143C",
+        buttercup: "#F49B15",
     },
 };
