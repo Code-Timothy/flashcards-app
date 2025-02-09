@@ -13,10 +13,28 @@ export const CategoryWrapper = styled.div`
 `;
 
 export const Category = styled.h2`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: ${({ theme }) => theme.colors.chatelle};
     border-bottom: 3px solid ${({ theme }) => theme.colors.chatelle};
     padding: 20px;
     margin: 0;
+`;
+
+export const EditSetButton = styled.button`
+    color: ${({ theme }) => theme.colors.chatelle};
+    background: ${({ theme }) => theme.colors.steelGray};
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: transform 0.5s;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.05);
+        opacity: 90%;
+    };
 `;
 
 export const Flashcards = styled.div`

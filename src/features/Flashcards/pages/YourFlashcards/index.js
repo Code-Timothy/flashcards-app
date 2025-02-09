@@ -1,13 +1,20 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CategoryWrapper, Category, Flashcards, Flashcard, Word, Wrapper, RemoveButton } from "./styled";
-import { removeFlashcard, selectFlashcardsByCategory, setCurrentCategory } from "../../flashcardsSlice";
+import { CategoryWrapper, Category, Flashcards, Flashcard, Word, Wrapper, RemoveButton, EditSetButton } from "./styled";
+import { removeFlashcard, selectCurrentCategory, selectFlashcardsByCategory, setCurrentCategory } from "../../flashcardsSlice";
 
 const YourFlashcards = () => {
     const dispatch = useDispatch();
     const flashcards = useSelector(selectFlashcardsByCategory);
+    const currentCategory = useSelector(selectCurrentCategory);
+    const [isEdit, setIsEdit] = useState(false);
+
+    const handleEditFlashcards = (category) => {
+        dispatch(setCurrentCategory(category));
+        setIsEdit(!isEdit)
+    };
 
     const handleRemoveFlashcard = (flashcardId, category) => {
-        dispatch(setCurrentCategory(category));
         dispatch(removeFlashcard({ flashcardId, category }))
     };
 
@@ -15,15 +22,20 @@ const YourFlashcards = () => {
         <Wrapper>
             {Object.keys(flashcards).map(category => (
                 <CategoryWrapper key={category}>
-                    <Category>{category}</Category>
+                    <Category>
+                        {category}
+                        <EditSetButton onClick={() => handleEditFlashcards(category)}>Edit set</EditSetButton>
+                    </Category>
                     <Flashcards>
                         {flashcards[category].map((flashcard => (
                             <Flashcard>
-                                <RemoveButton
-                                    onClick={() => handleRemoveFlashcard(flashcard.id, category)}
-                                >
-                                    ✖
-                                </RemoveButton>
+                                {isEdit && currentCategory === category && (
+                                    <RemoveButton
+                                        onClick={() => handleRemoveFlashcard(flashcard.id, category)}
+                                    >
+                                        ✖
+                                    </RemoveButton>
+                                )}
                                 <Word>
                                     {flashcard.word}
                                 </Word>
