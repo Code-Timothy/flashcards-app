@@ -92,17 +92,14 @@ const flashcardsSlice = createSlice({
             }
         },
         fetchExampleFlashcardsRequest: () => { },
-        fetchExampleFlashcardsSuccess: (state, { payload }) => {
-            for (const category in payload) {
-                if (state.flashcardsByCategory[category]) {
-                    state.flashcardsByCategory[category] = [
-                        ...state.flashcardsByCategory[category],
-                        ...payload[category],
-                    ];
-                } else {
-                    state.flashcardsByCategory[category] = payload[category];
+        fetchExampleFlashcardsSuccess: (state, { payload: { exampleFlashcards } }) => {
+            for (const category in exampleFlashcards) {
+                state.flashcardsByCategory[category] = exampleFlashcards[category];
+
+                if (!state.globalCategories.includes(category)) {
+                    state.globalCategories.push(category);
                 }
-            }
+            };
         },
     },
 });
