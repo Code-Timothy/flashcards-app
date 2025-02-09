@@ -15,7 +15,7 @@ function* flashcardsLocalStorageHandler() {
 function* fetchExampleFlashcardsHandler() {
     try {
         const exampleFlashcards = yield (call(fetchExampleFlashcards));
-        yield put(fetchExampleFlashcardsSuccess(exampleFlashcards));
+        yield put(fetchExampleFlashcardsSuccess({ exampleFlashcards }));
     } catch (error) {
         yield call(alert, "Something went wrong with fetching example flashcards.");
     }
