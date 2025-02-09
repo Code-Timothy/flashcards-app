@@ -91,6 +91,19 @@ const flashcardsSlice = createSlice({
                 flashcard.meaning = newMeaning;
             }
         },
+        fetchExampleFlashcardsRequest: () => { },
+        fetchExampleFlashcardsSuccess: (state, { payload }) => {
+            for (const category in payload) {
+                if (state.flashcardsByCategory[category]) {
+                    state.flashcardsByCategory[category] = [
+                        ...state.flashcardsByCategory[category],
+                        ...payload[category],
+                    ];
+                } else {
+                    state.flashcardsByCategory[category] = payload[category];
+                }
+            }
+        },
     },
 });
 
@@ -102,6 +115,8 @@ export const {
     removeFlashcard,
     editWord,
     editMeaning,
+    fetchExampleFlashcardsRequest,
+    fetchExampleFlashcardsSuccess,
 } = flashcardsSlice.actions;
 
 export const selectFlashcardsState = (state) => state.flashcards;
