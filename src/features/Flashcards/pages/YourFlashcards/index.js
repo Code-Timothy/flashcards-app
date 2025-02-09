@@ -1,10 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CategoryWrapper, Category, Flashcards, Flashcard, Word, Wrapper } from "./styled";
-import { selectFlashcardsByCategory } from "../../flashcardsSlice";
+import { removeFlashcard, selectFlashcardsByCategory, setCurrentCategory } from "../../flashcardsSlice";
 
 const YourFlashcards = () => {
+    const dispatch = useDispatch();
     const flashcards = useSelector(selectFlashcardsByCategory);
-    console.log(flashcards)
+
+    const handleRemoveFlashcard = (flashcardId, category) => {
+        dispatch(setCurrentCategory(category));
+        dispatch(removeFlashcard({ flashcardId, category }))
+    };
 
     return (
         <Wrapper>
@@ -14,6 +19,7 @@ const YourFlashcards = () => {
                     <Flashcards>
                         {flashcards[category].map((flashcard => (
                             <Flashcard>
+                                <button onClick={() => handleRemoveFlashcard(flashcard.id, category)}>usuń</button>
                                 <Word>
                                     {flashcard.word}
                                 </Word>
