@@ -14,7 +14,9 @@ import {
 import {
     editMeaning,
     editWord,
+    fetchExampleFlashcardsRequest,
     removeFlashcard,
+    removeSet,
     selectCurrentCategory,
     selectFlashcardsByCategory,
     setCurrentCategory,
@@ -71,11 +73,15 @@ const YourFlashcards = () => {
 
     return (
         <Wrapper>
+            <button onClick={() => dispatch(fetchExampleFlashcardsRequest())}>Get an example flashcard set</button>
             {Object.keys(flashcards).map(category => (
                 <CategoryWrapper key={category}>
                     <Category>
                         {category}
                         <EditSetButton onClick={() => handleEditSetFlashcards(category)}>Edit set</EditSetButton>
+                        {isEditSet && (
+                            <Button $removeSet onClick={() => dispatch(removeSet(category))}>✖</Button>
+                        )}
                     </Category>
                     <Flashcards>
                         {flashcards[category].map(flashcard => (

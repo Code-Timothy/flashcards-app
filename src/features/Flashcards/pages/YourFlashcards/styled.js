@@ -13,6 +13,7 @@ export const CategoryWrapper = styled.div`
 `;
 
 export const Category = styled.h2`
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,6 +76,14 @@ export const Button = styled.button`
     ${({ $edit }) => $edit && css`
         left: -10px;
         background: ${({ theme }) => theme.colors.buttercup};
+    `};
+
+    ${({ $removeSet }) => $removeSet && css`
+        font-size: 21px;
+        width: 40px;
+        height: 40px;
+        top: -20px;
+        right: -20px;
     `};
 `;
 
