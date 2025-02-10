@@ -1,13 +1,18 @@
 export const theme = {
     colors: {
         white: "#FFFFFF",
-        chatelle: "#ADA7C1",
+        tutu: "#FFF9FF",
+        pink: "#FFC2D1",
+        brinkPink: "#FB6F92",
         manatee: "#928CA6",
+        cornflower: "#8ECAE6",
+        easternBlue: "#219EBC",
         portage: "#9C81EA",
         gunPowder: "#4A465B",
-        steelGray: "#1F1D28",
+        turquoise: "#2EC4B6",
         tuna: "#343141",
-        crimson: "#DC143C",
-        buttercup: "#F49B15",
+        crimson: "#EF233C",
+        brightSun: "#FFDD32",
+        pastelGreen: "#96E072",
     },
 };

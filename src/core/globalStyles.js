@@ -11,6 +11,6 @@ export const GlobalStyles = createGlobalStyle`
 
     body{
         font-family: "Nunito", serif;
-        background: ${({ theme }) => theme.colors.tuna};
+        background: ${({ theme }) => theme.colors.tutu};
     };
 `;

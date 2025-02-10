@@ -5,13 +5,15 @@ export const Wrapper = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 40px;
+    padding: 30px;
 `;
 
 export const Tile = styled.button`
     border: none;
+    padding: 20px;
     border-radius: 10px;
-    background: ${({ theme }) => theme.colors.gunPowder};
+    background: ${({ theme }) => theme.colors.turquoise};
+    color: ${({ theme }) => theme.colors.white};
     transition: transform 0.5s;
 
     &:hover{
@@ -22,10 +24,6 @@ export const Tile = styled.button`
 
 export const CategoryName = styled.span`
     text-align: center;
-    padding: 20px;
     margin: 0;
     letter-spacing: 1px;
-    border-radius: 10px;
-    color: ${({ theme }) => theme.colors.white};
-    background: ${({ theme }) => theme.colors.steelGray};
 `;

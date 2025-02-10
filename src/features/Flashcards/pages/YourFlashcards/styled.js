@@ -9,14 +9,14 @@ export const Wrapper = styled.div`
 `;
 
 export const CategoryWrapper = styled.div`
-    border: 3px solid ${({ theme }) => theme.colors.chatelle};
+   
 `;
 
 export const GetExampleFlashcardsButton = styled.button`
     max-width: 350px;
     padding: 20px 30px;
-    color: ${({ theme }) => theme.colors.chatelle};
-    background: ${({ theme }) => theme.colors.steelGray};
+    color: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.turquoise};
     border: none;
     border-radius: 5px;
     text-transform: uppercase;
@@ -34,15 +34,17 @@ export const Category = styled.h2`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: ${({ theme }) => theme.colors.chatelle};
-    border-bottom: 3px solid ${({ theme }) => theme.colors.chatelle};
+    color: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.cornflower};
     padding: 20px;
     margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 `;
 
 export const EditSetButton = styled.button`
-    color: ${({ theme }) => theme.colors.chatelle};
-    background: ${({ theme }) => theme.colors.steelGray};
+    color: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.easternBlue};
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -58,16 +60,21 @@ export const EditSetButton = styled.button`
 export const Flashcards = styled.div`
     display: flex;
     justify-content: center;
+    background: ${({ theme }) => theme.colors.pink};
     flex-wrap: wrap;
     gap: 30px;
     padding: 20px;
     text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 `;
 
 export const Flashcard = styled.div`
     position: relative;
     min-width: 150px;
-    background: ${({ theme }) => theme.colors.chatelle};
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.brinkPink};
     padding: 10px;
     border-radius: 5px;
 `;
@@ -92,7 +99,7 @@ export const Button = styled.button`
 
     ${({ $edit }) => $edit && css`
         left: -10px;
-        background: ${({ theme }) => theme.colors.buttercup};
+        background: ${({ theme }) => theme.colors.brightSun};
     `};
 
     ${({ $removeSet }) => $removeSet && css`
@@ -102,10 +109,15 @@ export const Button = styled.button`
         top: -20px;
         right: -20px;
     `};
+
+    ${({ $done }) => $done && css`
+        left: -10px;
+        background: ${({ theme }) => theme.colors.pastelGreen};
+    `};
 `;
 
 export const Word = styled.p`
-    border-bottom: 2px dashed black;
+    border-bottom: 2px dashed ${({ theme }) => theme.colors.white};
     margin: 0;
     padding: 16px;
 
@@ -115,7 +127,7 @@ export const Word = styled.p`
 `;
 
 export const Input = styled.input`
-    background-color: ${({ theme }) => theme.colors.chatelle};
+    background-color: ${({ theme }) => theme.colors.pink};
     text-align: center;
     border-radius: 5px;
     border: 3px solid ${({ theme }) => theme.colors.portage};

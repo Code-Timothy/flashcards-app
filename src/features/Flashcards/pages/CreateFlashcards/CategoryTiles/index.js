@@ -11,7 +11,8 @@ const CategoryTiles = () => {
             {globalCategories.map((category, index) => (
                 <Tile
                     key={index}
-                    onClick={() => dispatch(setCurrentCategory(category))}>
+                    onClick={() => dispatch(setCurrentCategory(category))}
+                >
                     <CategoryName>{category}</CategoryName>
                 </Tile>
             ))}

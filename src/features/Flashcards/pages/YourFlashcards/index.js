@@ -128,7 +128,7 @@ const YourFlashcards = () => {
                                 </Word>
                                 {isEditing[flashcard.id] && (
                                     <Button
-                                        $edit
+                                        $done
                                         onClick={() => handleSaveWord(flashcard.id, category)}
                                     >
                                         ✔
