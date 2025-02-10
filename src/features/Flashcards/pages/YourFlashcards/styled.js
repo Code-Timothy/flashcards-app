@@ -12,6 +12,23 @@ export const CategoryWrapper = styled.div`
     border: 3px solid ${({ theme }) => theme.colors.chatelle};
 `;
 
+export const GetExampleFlashcardsButton = styled.button`
+    max-width: 350px;
+    padding: 20px 30px;
+    color: ${({ theme }) => theme.colors.chatelle};
+    background: ${({ theme }) => theme.colors.steelGray};
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: transform 0.5s;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.05);
+        opacity: 90%;
+    };
+`;
+
 export const Category = styled.h2`
     position: relative;
     display: flex;

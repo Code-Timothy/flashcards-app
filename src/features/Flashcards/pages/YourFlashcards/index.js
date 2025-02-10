@@ -10,6 +10,7 @@ import {
     Button,
     EditSetButton,
     Input,
+    GetExampleFlashcardsButton,
 } from "./styled";
 import {
     editMeaning,
@@ -73,7 +74,11 @@ const YourFlashcards = () => {
 
     return (
         <Wrapper>
-            <button onClick={() => dispatch(fetchExampleFlashcardsRequest())}>Get an example flashcard set</button>
+            <GetExampleFlashcardsButton
+                onClick={() => dispatch(fetchExampleFlashcardsRequest())}
+            >
+                Get an example flashcard set
+            </GetExampleFlashcardsButton>
             {Object.keys(flashcards).map(category => (
                 <CategoryWrapper key={category}>
                     <Category>
