@@ -91,6 +91,9 @@ const flashcardsSlice = createSlice({
                 flashcard.meaning = newMeaning;
             }
         },
+        removeSet: (state, { payload: category }) => {
+            delete state.flashcardsByCategory[category];
+        },
         fetchExampleFlashcardsRequest: () => { },
         fetchExampleFlashcardsSuccess: (state, { payload: { exampleFlashcards } }) => {
             for (const category in exampleFlashcards) {
@@ -112,6 +115,7 @@ export const {
     removeFlashcard,
     editWord,
     editMeaning,
+    removeSet,
     fetchExampleFlashcardsRequest,
     fetchExampleFlashcardsSuccess,
 } = flashcardsSlice.actions;
