@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSwipeable } from "react-swipeable";
+import { useSpring, animated } from "react-spring";
 import { Container } from "../../../../common/Container";
 import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,9 @@ import { nextFlashcard, selectCurrentIndex, selectFlashcardsBySpecificCategory, 
 const PractiseFlashcards = () => {
     const [isFlipped, setIsFlipped] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [dragging, setDragging] = useState(false);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
 
     const flashcardsBySpecificCategory = useSelector((state) => selectFlashcardsBySpecificCategory(state, selectedCategory));
     const currentIndex = useSelector(selectCurrentIndex);
@@ -19,15 +22,40 @@ const PractiseFlashcards = () => {
         setIsFlipped(flip => !flip);
     };
 
-    const handleSwipeRight = () => {
-        dispatch(nextFlashcard(selectedCategory));
+    const onTouchStart = (event) => {
+        setDragging(true);
+        const touchStartX = event.touches[0].clientX;
+        const touchStartY = event.touches[0].clientY;
+        setStartPosition({ x: touchStartX, y: touchStartY });
+        setPosition({ x: 0, y: 0 });
     };
 
-    const swipeHandlers = useSwipeable({
-        onSwipedRight: handleSwipeRight,
-        preventDefaultTouchmoveEvent: true,
-        trackMouse: true,
-      });
+    const onTouchMove = (event) => {
+        if (!dragging) return;
+
+        const deltaX = event.touches[0].clientX - startPosition.x;
+        const deltaY = event.touches[0].clientY - startPosition.y;
+
+        setPosition({
+            x: deltaX,
+            y: deltaY,
+        });
+    };
+
+    const onTouchEnd = () => {
+        setDragging(false);
+
+        if (position.x > 100) {
+            dispatch(nextFlashcard(selectedCategory));
+        }
+
+        setPosition({ x: 0, y: 0 });
+    };
+
+    const animatedStyle = useSpring({
+        transform: `translate(${position.x}px, ${position.y}px)`,
+        config: { tension: 400, friction: 20 },
+    });
 
     const currentFlashcard = flashcardsBySpecificCategory[currentIndex];
 
@@ -47,20 +75,27 @@ const PractiseFlashcards = () => {
             ) : flashcardsBySpecificCategory.length === 0 ? (
                 <p>No flashcards found for the selected category.</p>
             ) : (
-                <Wrapper {...swipeHandlers}>
+                <Wrapper>
                     <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
-                    <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
-                        {!isFlipped && (
-                            <FlashcardContent isFlipped={isFlipped}>
-                                {currentFlashcard.word}
-                            </FlashcardContent>
-                        )}
-                        {isFlipped && (
-                            <FlashcardContent isFlipped={isFlipped}>
-                                {currentFlashcard.meaning}
-                            </FlashcardContent>
-                        )}
-                    </Flashcard>
+                    <animated.div
+                        style={animatedStyle}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                    >
+                        <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
+                            {!isFlipped && (
+                                <FlashcardContent isFlipped={isFlipped}>
+                                    {currentFlashcard.word}
+                                </FlashcardContent>
+                            )}
+                            {isFlipped && (
+                                <FlashcardContent isFlipped={isFlipped}>
+                                    {currentFlashcard.meaning}
+                                </FlashcardContent>
+                            )}
+                        </Flashcard>
+                    </animated.div>
                     <ButtonWrapper>
                         <Button onClick={() => dispatch(nextFlashcard(selectedCategory))}>Next</Button>
                         <Button onClick={handleFlip}>Flip</Button>
