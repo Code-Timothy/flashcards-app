@@ -1,0 +1,254 @@
+{
+    "exampleFlashcards": [
+        {
+            "id": 1,
+            "word": "jabłko",
+            "meaning": "apple"
+        },
+        {
+            "id": 2,
+            "word": "banan",
+            "meaning": "banana"
+        },
+        {
+            "id": 3,
+            "word": "pomarańcza",
+            "meaning": "orange"
+        },
+        {
+            "id": 4,
+            "word": "truskawka",
+            "meaning": "strawberry"
+        },
+        {
+            "id": 5,
+            "word": "gruszka",
+            "meaning": "pear"
+        },
+        {
+            "id": 6,
+            "word": "winogrono",
+            "meaning": "grape"
+        },
+        {
+            "id": 7,
+            "word": "śliwka",
+            "meaning": "plum"
+        },
+        {
+            "id": 8,
+            "word": "arbuz",
+            "meaning": "watermelon"
+        },
+        {
+            "id": 9,
+            "word": "wiśnia",
+            "meaning": "cherry"
+        },
+        {
+            "id": 10,
+            "word": "ananas",
+            "meaning": "pineapple"
+        },
+        {
+            "id": 11,
+            "word": "malina",
+            "meaning": "raspberry"
+        },
+        {
+            "id": 12,
+            "word": "borówka",
+            "meaning": "blueberry"
+        },
+        {
+            "id": 13,
+            "word": "poziomka",
+            "meaning": "wild strawberry"
+        },
+        {
+            "id": 14,
+            "word": "grejpfrut",
+            "meaning": "grapefruit"
+        },
+        {
+            "id": 15,
+            "word": "kiwi",
+            "meaning": "kiwi"
+        },
+        {
+            "id": 16,
+            "word": "brzoskwinia",
+            "meaning": "peach"
+        },
+        {
+            "id": 17,
+            "word": "nektarynka",
+            "meaning": "nectarine"
+        },
+        {
+            "id": 18,
+            "word": "mandarynka",
+            "meaning": "tangerine"
+        },
+        {
+            "id": 19,
+            "word": "morela",
+            "meaning": "apricot"
+        },
+        {
+            "id": 20,
+            "word": "figa",
+            "meaning": "fig"
+        },
+        {
+            "id": 21,
+            "word": "granat",
+            "meaning": "pomegranate"
+        },
+        {
+            "id": 22,
+            "word": "marakuja",
+            "meaning": "passion fruit"
+        },
+        {
+            "id": 23,
+            "word": "cantaloupe",
+            "meaning": "cantaloupe"
+        },
+        {
+            "id": 24,
+            "word": "mango",
+            "meaning": "mango"
+        },
+        {
+            "id": 25,
+            "word": "jagoda",
+            "meaning": "huckleberry"
+        },
+        {
+            "id": 26,
+            "word": "papaja",
+            "meaning": "papaya"
+        },
+        {
+            "id": 27,
+            "word": "śliwka mirabelka",
+            "meaning": "mirabelle plum"
+        },
+        {
+            "id": 28,
+            "word": "czarna porzeczka",
+            "meaning": "black currant"
+        },
+        {
+            "id": 29,
+            "word": "czerwona porzeczka",
+            "meaning": "red currant"
+        },
+        {
+            "id": 30,
+            "word": "rabarbar",
+            "meaning": "rhubarb"
+        },
+        {
+            "id": 31,
+            "word": "truskawka dzika",
+            "meaning": "wild strawberry"
+        },
+        {
+            "id": 32,
+            "word": "litchi",
+            "meaning": "lychee"
+        },
+        {
+            "id": 33,
+            "word": "karambola",
+            "meaning": "starfruit"
+        },
+        {
+            "id": 34,
+            "word": "figowiec",
+            "meaning": "fig tree fruit"
+        },
+        {
+            "id": 35,
+            "word": "kumkwat",
+            "meaning": "kumquat"
+        },
+        {
+            "id": 36,
+            "word": "tamarillo",
+            "meaning": "tamarillo"
+        },
+        {
+            "id": 37,
+            "word": "daktyl",
+            "meaning": "date"
+        },
+        {
+            "id": 38,
+            "word": "ananas gwatemalski",
+            "meaning": "guatemalan pineapple"
+        },
+        {
+            "id": 39,
+            "word": "kumis",
+            "meaning": "fermented fruit drink"
+        },
+        {
+            "id": 40,
+            "word": "wawrzyn",
+            "meaning": "laurel fruit"
+        },
+        {
+            "id": 41,
+            "word": "sawina",
+            "meaning": "saw fruit"
+        },
+        {
+            "id": 42,
+            "word": "acai",
+            "meaning": "acai"
+        },
+        {
+            "id": 43,
+            "word": "pomelo",
+            "meaning": "pomelo"
+        },
+        {
+            "id": 44,
+            "word": "czarna jagoda",
+            "meaning": "blackberry"
+        },
+        {
+            "id": 45,
+            "word": "mangostan",
+            "meaning": "mangosteen"
+        },
+        {
+            "id": 46,
+            "word": "jackfruit",
+            "meaning": "jackfruit"
+        },
+        {
+            "id": 47,
+            "word": "orzech kokosowy",
+            "meaning": "coconut"
+        },
+        {
+            "id": 48,
+            "word": "wulkan",
+            "meaning": "volcanic fruit"
+        },
+        {
+            "id": 49,
+            "word": "maracuja",
+            "meaning": "maracuja fruit"
+        },
+        {
+            "id": 50,
+            "word": "grapefruit czerwony",
+            "meaning": "red grapefruit"
+        }
+    ]
+}
