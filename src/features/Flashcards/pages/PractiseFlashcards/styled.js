@@ -26,6 +26,11 @@ export const Flashcard = styled.div.withConfig({
     transform-style: preserve-3d;
     transition: transform 0.3s;
     transform: ${({ isFlipped }) => (isFlipped ? "rotateY(180deg)" : "rotateY(0deg)")};
+    
+    @media(max-width: 767px){
+        width: 200px;
+        height: 150px;
+    };
 `;
 
 export const FlashcardContent = styled.p.withConfig({
