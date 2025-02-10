@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSwipeable } from "react-swipeable";
 import { Container } from "../../../../common/Container";
 import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +19,16 @@ const PractiseFlashcards = () => {
         setIsFlipped(flip => !flip);
     };
 
+    const handleSwipeRight = () => {
+        dispatch(nextFlashcard(selectedCategory));
+    };
+
+    const swipeHandlers = useSwipeable({
+        onSwipedRight: handleSwipeRight,
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true,
+      });
+
     const currentFlashcard = flashcardsBySpecificCategory[currentIndex];
 
     return (
@@ -36,7 +47,7 @@ const PractiseFlashcards = () => {
             ) : flashcardsBySpecificCategory.length === 0 ? (
                 <p>No flashcards found for the selected category.</p>
             ) : (
-                <Wrapper>
+                <Wrapper {...swipeHandlers}>
                     <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
                     <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
                         {!isFlipped && (
