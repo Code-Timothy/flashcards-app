@@ -22,7 +22,7 @@ export const Flashcard = styled.div.withConfig({
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background: ${({ theme }) => theme.colors.gunPowder};
+    background: ${({ theme }) => theme.colors.brinkPink};
     transform-style: preserve-3d;
     transition: transform 0.3s;
     transform: ${({ isFlipped }) => (isFlipped ? "rotateY(180deg)" : "rotateY(0deg)")};
@@ -49,7 +49,7 @@ export const ButtonWrapper = styled.div`
 export const Button = styled.button`
     padding: 15px 30px;
     color: ${({ theme }) => theme.colors.white};
-    background: ${({ theme }) => theme.colors.portage};
+    background: ${({ theme }) => theme.colors.easternBlue};
     border: none;
     border-radius: 4px;
     transition: transform 1s;
