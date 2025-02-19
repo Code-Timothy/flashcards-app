@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 `;
 
 export const Counter = styled.p`
@@ -14,7 +15,7 @@ export const Counter = styled.p`
 
 export const Flashcard = styled.div.withConfig({
     shouldForwardProp: (prop) => prop !== "isFlipped",
-  })`
+})`
     width: 400px;
     height: 300px;
     display: flex;
@@ -35,7 +36,7 @@ export const Flashcard = styled.div.withConfig({
 
 export const FlashcardContent = styled.p.withConfig({
     shouldForwardProp: (prop) => prop !== "isFlipped",
-  })`
+})`
     animation: ${({ isFlipped }) => isFlipped ? css`${spin} 0.1s forwards` : css`${spin} 0.1s backwards`};
     text-align: center;
     font-size: 30px;
