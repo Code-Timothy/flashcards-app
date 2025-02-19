@@ -3,7 +3,7 @@ import { useSpring, animated } from "react-spring";
 import { Container } from "../../../../common/Container";
 import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
-import { nextFlashcard, selectCurrentIndex, selectFlashcardsBySpecificCategory, selectGlobalCategories } from "../../flashcardsSlice";
+import { nextFlashcard, previousFlashcard, selectCurrentIndex, selectFlashcardsBySpecificCategory, selectGlobalCategories } from "../../flashcardsSlice";
 
 const PractiseFlashcards = () => {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -107,8 +107,9 @@ const PractiseFlashcards = () => {
                         )}
                     </animated.div>
                     <ButtonWrapper>
-                        <Button onClick={() => dispatch(nextFlashcard(selectedCategory))}>Next</Button>
+                        <Button onClick={() => dispatch(previousFlashcard(selectedCategory))}>Previous</Button>
                         <Button onClick={handleFlip}>Flip</Button>
+                        <Button onClick={() => dispatch(nextFlashcard(selectedCategory))}>Next</Button>
                     </ButtonWrapper>
                 </Wrapper>
             )}
