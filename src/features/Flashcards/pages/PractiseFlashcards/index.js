@@ -32,6 +32,7 @@ const PractiseFlashcards = () => {
 
     const onTouchMove = (event) => {
         if (!dragging) return;
+        event.preventDefault();
 
         const deltaX = event.touches[0].clientX - startPosition.x;
         const deltaY = event.touches[0].clientY - startPosition.y;
