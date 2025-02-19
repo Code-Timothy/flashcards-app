@@ -3,7 +3,13 @@ import { useSpring, animated } from "react-spring";
 import { Container } from "../../../../common/Container";
 import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
-import { nextFlashcard, previousFlashcard, selectCurrentIndex, selectFlashcardsBySpecificCategory, selectGlobalCategories } from "../../flashcardsSlice";
+import {
+    nextFlashcard,
+    previousFlashcard,
+    selectCurrentIndex,
+    selectFlashcardsBySpecificCategory,
+    selectGlobalCategories
+} from "../../flashcardsSlice";
 
 const PractiseFlashcards = () => {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -11,6 +17,7 @@ const PractiseFlashcards = () => {
     const [dragging, setDragging] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
+    const [dragText, setDragText] = useState("");
 
     const flashcardsBySpecificCategory = useSelector((state) => selectFlashcardsBySpecificCategory(state, selectedCategory));
     const currentIndex = useSelector(selectCurrentIndex);
@@ -27,6 +34,7 @@ const PractiseFlashcards = () => {
         const touchStartY = event.touches[0].clientY;
         setStartPosition({ x: touchStartX, y: touchStartY });
         setPosition({ x: 0, y: 0 });
+        setDragText("");
         document.body.style.overflow = "hidden";
     };
 
@@ -42,6 +50,14 @@ const PractiseFlashcards = () => {
             x: deltaX,
             y: deltaY,
         });
+
+        if (deltaX > 5) {
+            setDragText("Next One");
+        } else if (deltaX < -5) {
+            setDragText("Previous One");
+        } else {
+            setDragText("");
+        }
     };
 
     const onTouchEnd = () => {
@@ -52,8 +68,14 @@ const PractiseFlashcards = () => {
             dispatch(nextFlashcard(selectedCategory));
         }
 
+        if (position.x < -100) {
+            setIsFlipped(false);
+            dispatch(previousFlashcard(selectedCategory));
+        }
+
         document.body.style.overflow = "auto";
         setPosition({ x: 0, y: 0 });
+        setDragText("");
     };
 
     const animatedStyle = useSpring({
@@ -88,8 +110,8 @@ const PractiseFlashcards = () => {
                         onTouchEnd={onTouchEnd}
                     >
                         {dragging ? (
-                            <Flashcard $dragging>
-                                <FlashcardContent>Next one</FlashcardContent>
+                            <Flashcard $dragging={dragging} positionX={position.x}>
+                                <FlashcardContent>{dragText}</FlashcardContent>
                             </Flashcard>
                         ) : (
                             <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
