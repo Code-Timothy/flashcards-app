@@ -23,7 +23,6 @@ const PractiseFlashcards = () => {
     };
 
     const onTouchStart = (event) => {
-        setDragging(true);
         const touchStartX = event.touches[0].clientX;
         const touchStartY = event.touches[0].clientY;
         setStartPosition({ x: touchStartX, y: touchStartY });
@@ -32,11 +31,12 @@ const PractiseFlashcards = () => {
     };
 
     const onTouchMove = (event) => {
-        if (!dragging) return;
-        event.preventDefault();
-
         const deltaX = event.touches[0].clientX - startPosition.x;
         const deltaY = event.touches[0].clientY - startPosition.y;
+
+        if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+            setDragging(true);
+        }
 
         setPosition({
             x: deltaX,
@@ -56,7 +56,7 @@ const PractiseFlashcards = () => {
 
     const animatedStyle = useSpring({
         transform: `translate(${position.x}px, ${position.y}px)`,
-        config: { tension: 400, friction: 20 },
+        config: { tension: 400, friction: 100 },
     });
 
     const currentFlashcard = flashcardsBySpecificCategory[currentIndex];
@@ -85,18 +85,24 @@ const PractiseFlashcards = () => {
                         onTouchMove={onTouchMove}
                         onTouchEnd={onTouchEnd}
                     >
-                        <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
-                            {!isFlipped && (
-                                <FlashcardContent isFlipped={isFlipped}>
-                                    {currentFlashcard.word}
-                                </FlashcardContent>
-                            )}
-                            {isFlipped && (
-                                <FlashcardContent isFlipped={isFlipped}>
-                                    {currentFlashcard.meaning}
-                                </FlashcardContent>
-                            )}
-                        </Flashcard>
+                        {dragging ? (
+                            <Flashcard $dragging>
+                                <FlashcardContent>Next one</FlashcardContent>
+                            </Flashcard>
+                        ) : (
+                            <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
+                                {!isFlipped && (
+                                    <FlashcardContent isFlipped={isFlipped}>
+                                        {currentFlashcard.word}
+                                    </FlashcardContent>
+                                )}
+                                {isFlipped && (
+                                    <FlashcardContent isFlipped={isFlipped}>
+                                        {currentFlashcard.meaning}
+                                    </FlashcardContent>
+                                )}
+                            </Flashcard>
+                        )}
                     </animated.div>
                     <ButtonWrapper>
                         <Button onClick={() => dispatch(nextFlashcard(selectedCategory))}>Next</Button>

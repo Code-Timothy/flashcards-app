@@ -32,6 +32,10 @@ export const Flashcard = styled.div.withConfig({
         width: 200px;
         height: 150px;
     };
+
+    ${({ $dragging }) => $dragging && css`
+        background: ${({ theme }) => theme.colors.pastelGreen};
+    `};
 `;
 
 export const FlashcardContent = styled.p.withConfig({
