@@ -48,6 +48,7 @@ const PractiseFlashcards = () => {
         setDragging(false);
 
         if (position.x > 100) {
+            setIsFlipped(false);
             dispatch(nextFlashcard(selectedCategory));
         }
 
