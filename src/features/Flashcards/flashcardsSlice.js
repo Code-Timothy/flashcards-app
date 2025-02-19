@@ -68,6 +68,21 @@ const flashcardsSlice = createSlice({
                 state.currentIndex = 0;
             }
         },
+        previousFlashcard: (state, action) => {
+            const category = action.payload;
+
+            if (!state.flashcardsByCategory[category] || state.flashcardsByCategory[category].length === 0) {
+                state.currentIndex = 0;
+            }
+
+            const previousIndex = state.currentIndex - 1;
+
+            if (previousIndex >= 0) {
+                state.currentIndex = previousIndex;
+            } else {
+                state.currentIndex = 0;
+            }
+        },
         setCurrentCategory: (state, { payload }) => {
             state.currentCategory = payload;
         },
@@ -111,6 +126,7 @@ export const {
     addFlashcard,
     addCategory,
     nextFlashcard,
+    previousFlashcard,
     setCurrentCategory,
     removeFlashcard,
     editWord,
