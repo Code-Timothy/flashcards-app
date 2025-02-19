@@ -56,7 +56,7 @@ const PractiseFlashcards = () => {
 
     const animatedStyle = useSpring({
         transform: `translate(${position.x}px, ${position.y}px)`,
-        config: { tension: 400, friction: 100 },
+        config: { tension: 1300, friction: 100 },
     });
 
     const currentFlashcard = flashcardsBySpecificCategory[currentIndex];
