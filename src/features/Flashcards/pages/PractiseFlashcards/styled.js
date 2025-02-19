@@ -14,7 +14,7 @@ export const Counter = styled.p`
 `;
 
 export const Flashcard = styled.div.withConfig({
-    shouldForwardProp: (prop) => prop !== "isFlipped",
+    shouldForwardProp: (prop) => prop !== "isFlipped" && prop !== "positionX",
 })`
     width: 400px;
     height: 300px;
@@ -33,8 +33,11 @@ export const Flashcard = styled.div.withConfig({
         height: 150px;
     };
 
-    ${({ $dragging }) => $dragging && css`
-        background: ${({ theme }) => theme.colors.pastelGreen};
+    ${({ $dragging, positionX, theme }) => $dragging && css`
+        background: 
+            ${positionX > 5 ? theme.colors.pastelGreen :
+            positionX < -5 ? theme.colors.brightSun
+                : theme.colors.brinkPink};
     `};
 `;
 
