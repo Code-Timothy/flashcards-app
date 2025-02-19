@@ -52,6 +52,7 @@ const PractiseFlashcards = () => {
             dispatch(nextFlashcard(selectedCategory));
         }
 
+        document.body.style.overflow = "auto";
         setPosition({ x: 0, y: 0 });
     };
 
