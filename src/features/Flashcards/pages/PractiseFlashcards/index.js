@@ -28,6 +28,7 @@ const PractiseFlashcards = () => {
         const touchStartY = event.touches[0].clientY;
         setStartPosition({ x: touchStartX, y: touchStartY });
         setPosition({ x: 0, y: 0 });
+        document.body.style.overflow = "hidden";
     };
 
     const onTouchMove = (event) => {
