@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import { Container } from "../../../../common/Container";
 import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button } from "./styled";
@@ -24,6 +24,12 @@ const PractiseFlashcards = () => {
     const globalCategories = useSelector(selectGlobalCategories);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (globalCategories.length > 0 && !selectedCategory) {
+            setSelectedCategory(globalCategories[0]);
+        }
+    }, [globalCategories, selectedCategory]);
 
     const handleFlip = () => {
         setIsFlipped(flip => !flip);
