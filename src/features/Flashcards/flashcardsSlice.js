@@ -53,6 +53,24 @@ const flashcardsSlice = createSlice({
                 state.flashcardsByCategory[category] = [];
             };
         },
+        addToFavourites: (state, { payload: { flashcardId, word, meaning } }) => {
+            const favouritesCategory = "Favourites";
+
+            if (!state.flashcardsByCategory[favouritesCategory]) {
+                state.flashcardsByCategory[favouritesCategory] = [];
+            }
+
+            const isAlreadyInFavourites = state.flashcardsByCategory[favouritesCategory].some(
+                flashcard => flashcard.id === flashcardId);
+
+            if (!isAlreadyInFavourites) {
+                state.flashcardsByCategory[favouritesCategory].push({ id: flashcardId, word, meaning });
+            }
+
+            if (!state.globalCategories.includes(favouritesCategory)) {
+                state.globalCategories.push(favouritesCategory);
+            }
+        },
         nextFlashcard: (state, action) => {
             const category = action.payload;
 
@@ -132,6 +150,7 @@ const flashcardsSlice = createSlice({
 export const {
     addFlashcard,
     addCategory,
+    addToFavourites,
     nextFlashcard,
     previousFlashcard,
     setCurrentCategory,
