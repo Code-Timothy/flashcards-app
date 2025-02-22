@@ -13,6 +13,7 @@ export const theme = {
         tuna: "#343141",
         crimson: "#EF233C",
         brightSun: "#FFDD32",
+        fruitSalad: "#4CAF50",
         pastelGreen: "#96E072",
     },
 };
