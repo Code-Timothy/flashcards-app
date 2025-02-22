@@ -10,7 +10,8 @@ import {
     previousFlashcard,
     selectCurrentIndex,
     selectFlashcardsBySpecificCategory,
-    selectGlobalCategories
+    selectGlobalCategories,
+    setCurrentIndex
 } from "../../flashcardsSlice";
 
 const PractiseFlashcards = () => {
@@ -20,7 +21,7 @@ const PractiseFlashcards = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
     const [dragText, setDragText] = useState("");
-    const [showNotification, setShowNotifictaion] = useState(false);
+    const [showNotification, setShowNotification] = useState(false);
 
     const flashcardsBySpecificCategory = useSelector((state) => selectFlashcardsBySpecificCategory(state, selectedCategory));
     const currentIndex = useSelector(selectCurrentIndex);
@@ -34,6 +35,12 @@ const PractiseFlashcards = () => {
         }
     }, [globalCategories, selectedCategory]);
 
+    const handleCategoryChange = (event) => {
+        const newCategory = event.target.value;
+        setSelectedCategory(newCategory);
+        dispatch(setCurrentIndex(0));
+    };
+
     const handleFlip = () => {
         setIsFlipped(flip => !flip);
     };
@@ -46,9 +53,9 @@ const PractiseFlashcards = () => {
             flashcardId: currentFlashcard.id,
         }));
 
-        setShowNotifictaion(true);
+        setShowNotification(true);
         setTimeout(() => {
-            setShowNotifictaion(false);
+            setShowNotification(false);
         }, 3000);
     };
 
@@ -106,13 +113,13 @@ const PractiseFlashcards = () => {
         config: { tension: 1300, friction: 100 },
     });
 
-    const currentFlashcard = flashcardsBySpecificCategory[currentIndex];
+    const currentFlashcard = flashcardsBySpecificCategory[currentIndex || 0];
 
     return (
         <Container>
             <select
                 value={selectedCategory}
-                onChange={({ target }) => setSelectedCategory(target.value)}
+                onChange={handleCategoryChange}
             >
                 {globalCategories.map((category, index) => (
                     <option key={index} value={category}>{category}</option>
