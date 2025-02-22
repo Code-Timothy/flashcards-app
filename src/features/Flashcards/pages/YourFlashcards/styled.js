@@ -77,6 +77,11 @@ export const Flashcard = styled.div`
     background: ${({ theme }) => theme.colors.brinkPink};
     padding: 10px;
     border-radius: 5px;
+    transition: transform 1s;
+
+    &:hover{
+        transform: scale(1.1);
+    };
 `;
 
 export const Button = styled.button`
