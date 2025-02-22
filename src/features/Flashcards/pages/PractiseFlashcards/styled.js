@@ -9,8 +9,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Counter = styled.p`
+    text-align: center;
     margin-top: 30px;
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.black};
 `;
 
 export const Flashcard = styled.div.withConfig({

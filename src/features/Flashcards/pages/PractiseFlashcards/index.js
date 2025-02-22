@@ -102,7 +102,6 @@ const PractiseFlashcards = () => {
                 <p>No flashcards found for the selected category.</p>
             ) : (
                 <Wrapper>
-                    <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
                     <animated.div
                         style={animatedStyle}
                         onTouchStart={onTouchStart}
@@ -114,18 +113,21 @@ const PractiseFlashcards = () => {
                                 <FlashcardContent>{dragText}</FlashcardContent>
                             </Flashcard>
                         ) : (
-                            <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
-                                {!isFlipped && (
-                                    <FlashcardContent isFlipped={isFlipped}>
-                                        {currentFlashcard.word}
-                                    </FlashcardContent>
-                                )}
-                                {isFlipped && (
-                                    <FlashcardContent isFlipped={isFlipped}>
-                                        {currentFlashcard.meaning}
-                                    </FlashcardContent>
-                                )}
-                            </Flashcard>
+                            <>
+                                <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
+                                <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
+                                    {!isFlipped && (
+                                        <FlashcardContent isFlipped={isFlipped}>
+                                            {currentFlashcard.word}
+                                        </FlashcardContent>
+                                    )}
+                                    {isFlipped && (
+                                        <FlashcardContent isFlipped={isFlipped}>
+                                            {currentFlashcard.meaning}
+                                        </FlashcardContent>
+                                    )}
+                                </Flashcard>
+                            </>
                         )}
                     </animated.div>
                     <ButtonWrapper>
