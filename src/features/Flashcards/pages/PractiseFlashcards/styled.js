@@ -17,6 +17,7 @@ export const Counter = styled.p`
 export const Flashcard = styled.div.withConfig({
     shouldForwardProp: (prop) => prop !== "isFlipped" && prop !== "positionX",
 })`
+    position: relative;
     width: 400px;
     height: 300px;
     display: flex;
@@ -40,6 +41,20 @@ export const Flashcard = styled.div.withConfig({
             positionX < -5 ? theme.colors.brightSun
                 : theme.colors.brinkPink};
     `};
+`;
+
+export const FavouriteButton = styled.button`
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    transition: transform 0.5s;
+
+    &:hover{
+        transform: scale(1.3);
+        cursor: pointer;
+    };
 `;
 
 export const FlashcardContent = styled.p.withConfig({

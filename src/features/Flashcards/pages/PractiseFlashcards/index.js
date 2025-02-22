@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
 import { Container } from "../../../../common/Container";
-import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button } from "./styled";
-import { useDispatch, useSelector } from "react-redux";
+import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button, FavouriteButton } from "./styled";
+import { ReactComponent as StarIcon } from "../../../../images/star.svg";
 import {
+    addToFavourites,
     nextFlashcard,
     previousFlashcard,
     selectCurrentIndex,
@@ -33,6 +35,15 @@ const PractiseFlashcards = () => {
 
     const handleFlip = () => {
         setIsFlipped(flip => !flip);
+    };
+
+    const handleAddToFavourites = (event) => {
+        event.stopPropagation();
+        dispatch(addToFavourites({
+            word: currentFlashcard.word,
+            meaning: currentFlashcard.meaning,
+            flashcardId: currentFlashcard.id,
+        }));
     };
 
     const onTouchStart = (event) => {
@@ -121,6 +132,7 @@ const PractiseFlashcards = () => {
                         ) : (
                             <>
                                 <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
+                                    <FavouriteButton onClick={handleAddToFavourites}><StarIcon /></FavouriteButton>
                                     {!isFlipped && (
                                         <FlashcardContent isFlipped={isFlipped}>
                                             {currentFlashcard.word}
