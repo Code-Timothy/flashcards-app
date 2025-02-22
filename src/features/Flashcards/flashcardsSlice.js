@@ -134,6 +134,9 @@ const flashcardsSlice = createSlice({
 
             state.currentCategory = null;
         },
+        setCurrentIndex: (state, { payload }) => {
+            state.currentIndex = payload;
+        },
         fetchExampleFlashcardsRequest: () => { },
         fetchExampleFlashcardsSuccess: (state, { payload: { exampleFlashcards } }) => {
             for (const category in exampleFlashcards) {
@@ -158,6 +161,7 @@ export const {
     editWord,
     editMeaning,
     removeSet,
+    setCurrentIndex,
     fetchExampleFlashcardsRequest,
     fetchExampleFlashcardsSuccess,
 } = flashcardsSlice.actions;
