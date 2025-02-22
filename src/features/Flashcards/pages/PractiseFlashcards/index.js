@@ -101,6 +101,7 @@ const PractiseFlashcards = () => {
                 <p>No flashcards found for the selected category.</p>
             ) : (
                 <Wrapper>
+                    <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
                     <animated.div
                         style={animatedStyle}
                         onTouchStart={onTouchStart}
@@ -113,7 +114,6 @@ const PractiseFlashcards = () => {
                             </Flashcard>
                         ) : (
                             <>
-                                <Counter>{currentIndex + 1} / {flashcardsBySpecificCategory.length}</Counter>
                                 <Flashcard isFlipped={isFlipped} onClick={handleFlip}>
                                     {!isFlipped && (
                                         <FlashcardContent isFlipped={isFlipped}>
