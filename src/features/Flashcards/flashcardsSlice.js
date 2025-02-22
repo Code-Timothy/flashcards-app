@@ -108,6 +108,13 @@ const flashcardsSlice = createSlice({
         },
         removeSet: (state, { payload: category }) => {
             delete state.flashcardsByCategory[category];
+
+            const categoryIndex = state.globalCategories.indexOf(category);
+            if (categoryIndex !== -1) {
+                state.globalCategories.splice(categoryIndex, 1);
+            }
+
+            state.currentCategory = null;
         },
         fetchExampleFlashcardsRequest: () => { },
         fetchExampleFlashcardsSuccess: (state, { payload: { exampleFlashcards } }) => {
