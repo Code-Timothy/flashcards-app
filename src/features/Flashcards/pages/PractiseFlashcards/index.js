@@ -91,7 +91,6 @@ const PractiseFlashcards = () => {
                 value={selectedCategory}
                 onChange={({ target }) => setSelectedCategory(target.value)}
             >
-                <option>Select Category</option>
                 {globalCategories.map((category, index) => (
                     <option key={index} value={category}>{category}</option>
                 ))}
