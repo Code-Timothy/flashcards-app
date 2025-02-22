@@ -90,6 +90,36 @@ export const Button = styled.button`
     };
 `;
 
+export const Notification = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: ${({ theme }) => theme.colors.fruitSalad};
+  color: ${({ theme }) => theme.colors.white};
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  opacity: 0;
+  animation: showNotification 3s forwards;
+
+  @keyframes showNotification {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+  }
+`;
+
 const spin = keyframes`
     0%
     {

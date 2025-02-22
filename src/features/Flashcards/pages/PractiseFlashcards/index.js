@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
 import { Container } from "../../../../common/Container";
-import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button, FavouriteButton } from "./styled";
+import { Wrapper, Counter, Flashcard, FlashcardContent, ButtonWrapper, Button, FavouriteButton, Notification } from "./styled";
 import { ReactComponent as StarIcon } from "../../../../images/star.svg";
 import {
     addToFavourites,
@@ -20,6 +20,7 @@ const PractiseFlashcards = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
     const [dragText, setDragText] = useState("");
+    const [showNotification, setShowNotifictaion] = useState(false);
 
     const flashcardsBySpecificCategory = useSelector((state) => selectFlashcardsBySpecificCategory(state, selectedCategory));
     const currentIndex = useSelector(selectCurrentIndex);
@@ -44,6 +45,11 @@ const PractiseFlashcards = () => {
             meaning: currentFlashcard.meaning,
             flashcardId: currentFlashcard.id,
         }));
+
+        setShowNotifictaion(true);
+        setTimeout(() => {
+            setShowNotifictaion(false);
+        }, 3000);
     };
 
     const onTouchStart = (event) => {
@@ -152,6 +158,12 @@ const PractiseFlashcards = () => {
                         <Button onClick={handleFlip}>Flip</Button>
                         <Button onClick={() => dispatch(nextFlashcard(selectedCategory))}>Next</Button>
                     </ButtonWrapper>
+
+                    {showNotification && (
+                        <Notification>
+                            Flashcard added to favourites!
+                        </Notification>
+                    )}
                 </Wrapper>
             )}
         </Container>
